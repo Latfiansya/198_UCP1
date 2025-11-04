@@ -30,3 +30,13 @@ app.post('/kandang', async (req, res) => {
         res.status(500).send({ message: error.message });
     }
 });
+
+// GET
+app.get('/kandang', async (req, res) => {
+    try {
+        const kandang = await db.Data_Kandang.findAll();
+        res.send(kandang);
+    } catch (error) {
+        res.status(500).send({ message: error.message });
+    }   
+});
