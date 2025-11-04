@@ -24,8 +24,8 @@ db.sequelize.sync()
 app.post('/kandang', async (req, res) => {
     const data = req.body;
     try {
-        const newKandang = await db.Data_Kandang.create(data);
-        res.send(newKandang);
+        const kandang = await db.kandang.create(data);
+        res.send(kandang);
     } catch (error) {
         res.status(500).send({ message: error.message });
     }
@@ -34,7 +34,7 @@ app.post('/kandang', async (req, res) => {
 // GET
 app.get('/kandang', async (req, res) => {
     try {
-        const kandang = await db.Data_Kandang.findAll();
+        const kandang = await db.kandang.findAll();
         res.send(kandang);
     } catch (error) {
         res.status(500).send({ message: error.message });
@@ -46,12 +46,12 @@ app.put('/kandang/:id', async (req, res) => {
     const id = req.params.id;
     const data = req.body;
     try {
-        const updateKandang = await db.Data_Kandang.findByPk(id);
-        if (!updateKandang) {
+        const kandang = await db.kandang.findByPk(id);
+        if (!kandang) {
             return res.status(404).send({ message: 'Data tidak ditemukan' });
         }
-        await updateKandang.update(data);
-        res.send({ message: 'Data berhasil diupdate', updateKandang });
+        await kandang.update(data);
+        res.send({ message: 'Data berhasil diupdate', kandang });
     } catch (error) {
         res.status(500).send({ message: error.message });
     }
@@ -61,7 +61,7 @@ app.put('/kandang/:id', async (req, res) => {
 app.delete('/kandang/:id', async (req, res) => {
     const id = req.params.id;
     try {
-        const deleteKandang = await db.Data_Kandang.findByPk(id);
+        const deleteKandang = await db.kandang.findByPk(id);
         if (!deleteKandang) {
             return res.status(404).send({ message: 'Data tidak ditemukan' });
         }

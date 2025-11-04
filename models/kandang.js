@@ -1,6 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const Data_Kandang = sequelize.define('Data_Kandang', {
-        id_kandang: {
+    const kandang = sequelize.define('kandang', {
             id: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
@@ -26,11 +25,10 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.INTEGER,
                 allowNull: false
             }
-        }
-    }, {
-        tableName: 'data_kandang',
+        }, {
+        tableName: 'kandang',
         timestamps: false,
         freezeTableName: true
     });
-    return Data_Kandang;
+    return kandang;
 };
