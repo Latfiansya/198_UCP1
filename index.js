@@ -40,3 +40,19 @@ app.get('/kandang', async (req, res) => {
         res.status(500).send({ message: error.message });
     }   
 });
+
+// PUT
+app.put('/kandang/:id', async (req, res) => {
+    const id = req.params.id;
+    const data = req.body;
+    try {
+        const updateKandang = await db.Data_Kandang.findByPk(id);
+        if (!updateKandang) {
+            return res.status(404).send({ message: 'Data tidak ditemukan' });
+        }
+        await updateKandang.update(data);
+        res.send({ message: 'Data berhasil diupdate', updateKandang });
+    } catch (error) {
+        res.status(500).send({ message: error.message });
+    }
+});
