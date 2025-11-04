@@ -18,3 +18,15 @@ db.sequelize.sync()
         console.error('Gagal menyinkronkan database:', err);
 });
 
+// Route
+
+// POST
+app.post('/kandang', async (req, res) => {
+    const data = req.body;
+    try {
+        const newKandang = await db.Data_Kandang.create(data);
+        res.send(newKandang);
+    } catch (error) {
+        res.status(500).send({ message: error.message });
+    }
+});
